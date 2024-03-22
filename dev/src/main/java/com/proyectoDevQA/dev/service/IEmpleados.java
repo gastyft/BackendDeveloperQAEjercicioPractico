@@ -14,7 +14,7 @@ public interface IEmpleados{
     
     public Empleados findEmpleado (Long id);
     
-     boolean empleadoEstaIngresado(Long id);
+     boolean isEmpleadoEstaIngresado(Long id);
      
-  public boolean empleadoIgualCompania(Long id,String compania);
+  public boolean isEmpleadoIgualCompania(Long id,String compania);
 }

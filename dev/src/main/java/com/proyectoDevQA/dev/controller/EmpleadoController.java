@@ -3,9 +3,13 @@ package com.proyectoDevQA.dev.controller;
 
 import com.proyectoDevQA.dev.model.Empleados;
 import com.proyectoDevQA.dev.service.IEmpleados;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,16 +36,16 @@ public class EmpleadoController {
     @PostMapping("/crear")
     public String createUser(@RequestBody Empleados emp) {
         interEmpleado.saveEmpleado(emp);
-        return "El dispositivo fue guardado correctamente";
+        return "El empleado fue guardado correctamente";
     }
 
     @DeleteMapping("/borrar/{id}")
     public String deleteEmp(@PathVariable Long id) {
         interEmpleado.deleteEmpleado(id);
-        return "El dispositivo fue eliminado correctamente";
+        return "El empleado fue eliminado correctamente";
     }
 
-    @PutMapping("/editar/{id}")
+    @PutMapping("/editar/{id}") // NO TIENE VALIDACION
     public Empleados editEmp(@PathVariable Long id,
                             @RequestParam("nombre") String nuevoNombre,
                             @RequestParam("apellido") String nuevoApellido,
@@ -68,32 +72,43 @@ public class EmpleadoController {
 
  @GetMapping("/ingreso/{id}")   //Endpoint donde corrobora si el empleado esta solo ingresado
   public boolean ingresoVerifica(@PathVariable Long id){ 
-        return interEmpleado.empleadoEstaIngresado(id);
+        return interEmpleado.isEmpleadoEstaIngresado(id);
     }
   
 @GetMapping("/compania/{id}/{compania}") // Endpoint para verificar si el empleado pertenece a la misma compañía
 public boolean companiaIgual(@PathVariable Long id, @PathVariable String compania) {
-    return interEmpleado.empleadoIgualCompania(id, compania);
+    return interEmpleado.isEmpleadoIgualCompania(id, compania);
 }
-  @PutMapping("/ingresoUsuario/{id}") //puede ser con el ID "/personas/editar/{id}"
-    public Empleados ingresoedit(@PathVariable Long id,
+  @PutMapping("/editarusuario/{id}") 
+    public Object ingresoedit(@PathVariable Long id,
             @RequestParam ("nombre") String nuevoNombre,
             @RequestParam("apellido") String nuevoApellido,
-            @RequestParam("fechaIngreso") Date nuevoIngreso,
-            @RequestParam("fechaEgreso") Date nuevoEgreso,
+          @RequestParam("fechaIngreso") String nuevoIngreso,
+        @RequestParam("fechaEgreso") String nuevoEgreso,
             @RequestParam("dni") int nuevodni,
-            @RequestParam("compania") String nuevacompania){
+            @RequestParam("compania") String nuevacompania) throws ParseException{
     Empleados emp= interEmpleado.findEmpleado(id);
- 
+    // Instancio un DateFormat para poder convertir un String en formato Fecha y hora debido a que al pasar los parametros sin eso 
+    //en Postman lanzaba una Exception
+  DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    Date ingresoDate= dateFormat.parse(nuevoIngreso);
+    Date egresoDate=dateFormat.parse(nuevoEgreso);
     emp.setNombre(nuevoNombre);
     emp.setApellido(nuevoApellido);
-    emp.setFechaIngreso(nuevoIngreso);
-    emp.setFechaEgreso(nuevoEgreso);
+    emp.setFechaIngreso(ingresoDate);
+    emp.setFechaEgreso(egresoDate);
     emp.setDni(nuevodni);
             emp.setCompania(nuevacompania);
-    interEmpleado.saveEmpleado(emp);
-    
-    return emp;
+              if(interEmpleado.isEmpleadoIgualCompania(id, emp.getCompania()))
+                  return "Ya existe empleado con esa compania";
+
+              else
+              {
+                  interEmpleado.saveEmpleado(emp);
+      return emp;
+                    
+              }
+                
     }
  
 }

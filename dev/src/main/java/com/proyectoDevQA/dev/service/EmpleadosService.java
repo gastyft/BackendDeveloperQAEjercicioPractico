@@ -31,12 +31,12 @@ public class EmpleadosService implements IEmpleados{
         return emp;
     }
       @Override
-    public boolean empleadoEstaIngresado(Long id) {  //En angular corrobora true o false si esta ingresado para generar cartel error
+    public boolean isEmpleadoEstaIngresado(Long id) {  //En angular corrobora true o false si esta ingresado para poder cargar egreso. Si devuelve false no se puede cargar fecha de egreso
     Empleados empleado = findEmpleado(id);
     return empleado != null && empleado.getFechaIngreso() != null && empleado.getFechaEgreso() == null;
     }
      @Override
-    public boolean empleadoIgualCompania(Long id,String compania) { //DEVUELVE TRUE SI SON IGUALES EN ANGULAR IF TRUE ENTONCES CARTEL ER
+    public boolean isEmpleadoIgualCompania(Long id,String compania) { //DEVUELVE TRUE SI SON IGUALES EN ANGULAR IF TRUE ENTONCES CARTEL ER
         Empleados empleado = empleadoRepository.findById(id).orElse(null);
             if(compania!= null && empleado.getCompania() != null && empleado.getCompania().equals(compania))
         return true;
