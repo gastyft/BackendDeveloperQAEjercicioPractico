@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.3</version>
+		<version>3.2.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.backendDeveloperQA</groupId>
-	<artifactId>BackendDeveloperQA</artifactId>
+	<groupId>com.proyectoDevQA</groupId>
+	<artifactId>dev</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>BackendDeveloperQA</name>
-	<description>Backend proyect for challenge Exactian </description>
+	<name>dev</name>
+	<description>DEV QA Proyect</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
