@@ -24,18 +24,18 @@ public class Empleados {
      private Long id;
      private  String nombre;
      private String apellido;
-      
+     
      private String compania;
-     @Column(unique = true) //Esta etiqueta no permite que se repita un dni
+     //Esta etiqueta no permite que se repita un dni
      private int dni;
      @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss") // Formato para la entrada
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss") // Formato para la salida JSON
      @Temporal(TemporalType.TIMESTAMP)//Como debe mapear en la base de datos de tipo fecha
-    private Date fechaIngreso;
+    private String fechaIngreso;
       @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss") // Formato para la entrada
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss") // Formato para la salida JSON
     @Temporal(TemporalType.TIMESTAMP) //Como debe mapear en la base de datos de tipo fecha
-    private Date fechaEgreso=null;
+    private String fechaEgreso=null;
     
     
 }

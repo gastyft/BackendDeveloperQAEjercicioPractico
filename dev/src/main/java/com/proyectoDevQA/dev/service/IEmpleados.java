@@ -15,6 +15,7 @@ public interface IEmpleados{
     public Empleados findEmpleado (Long id);
     
      boolean isEmpleadoEstaIngresado(Long id);
-     
-  public boolean isEmpleadoIgualCompania(Long id,String compania);
+    public boolean existeEmpleadoConDniYCompania(int dni, String compania);
+ public List<Empleados> getEmpleadosPorDNI(int dni) ;
+
 }

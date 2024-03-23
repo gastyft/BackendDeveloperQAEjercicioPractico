@@ -35,13 +35,20 @@ public class EmpleadosService implements IEmpleados{
     Empleados empleado = findEmpleado(id);
     return empleado != null && empleado.getFechaIngreso() != null && empleado.getFechaEgreso() == null;
     }
-     @Override
-    public boolean isEmpleadoIgualCompania(Long id,String compania) { //DEVUELVE TRUE SI SON IGUALES EN ANGULAR IF TRUE ENTONCES CARTEL ER
-        Empleados empleado = empleadoRepository.findById(id).orElse(null);
-            if(compania!= null && empleado.getCompania() != null && empleado.getCompania().equals(compania))
-        return true;
-            else
-          return false;
     
+
+ 
+
+     @Override
+  public boolean existeEmpleadoConDniYCompania(int dni, String compania) {
+    // Realiza la consulta en la base de datos para verificar si existe un empleado con el mismo DNI y compañía
+ 
+    Empleados empleado = empleadoRepository.findByDniAndCompania(dni, compania);
+ boolean existeEmpleado = empleado != null;
+ return existeEmpleado;
+}
+  public List<Empleados> getEmpleadosPorDNI(int dni) {
+    // Lógica para buscar y devolver los empleados por DNI con todas las compañías asociadas
+    return empleadoRepository.findByDni(dni);
 }
  }

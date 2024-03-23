@@ -5,6 +5,7 @@
 package com.proyectoDevQA.dev.repository;
 
 import com.proyectoDevQA.dev.model.Empleados;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -12,5 +13,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Usuario
  */
 public interface EmpleadosRepository extends JpaRepository<Empleados,Long>  {
-    
+     Empleados findByDniAndCompania(int dni, String compania);
+
+    public List<Empleados> findByDni(int dni);
 }
+
