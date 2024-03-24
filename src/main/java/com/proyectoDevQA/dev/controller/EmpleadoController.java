@@ -37,10 +37,7 @@ public class EmpleadoController {
     @Autowired
     private IEmpleados interEmpleado;
  
-  @GetMapping("/")
-    public String home() {
-        return "index"; // Devuelve el nombre de la vista que quieres mostrar en la ruta raíz
-    }
+
     @GetMapping("/getempleadoslist") //Metodo GET para obtener la lista de empleados
     public List<Empleados> getEmp() {
         return interEmpleado.getEmpleado();
