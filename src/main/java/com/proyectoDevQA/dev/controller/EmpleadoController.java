@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
  @RestController
-@CrossOrigin(origins="https://desafiodevqa.web.app/")
+@CrossOrigin(origins="https://desafiodevqa.web.app")
 @RequestMapping("/empleados")
 public class EmpleadoController {
     @Autowired
