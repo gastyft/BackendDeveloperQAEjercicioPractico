@@ -28,18 +28,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-
  @RestController
 @RequestMapping("empleados")
 @CrossOrigin(origins="https://desafiodevqa.web.app")
-<<<<<<< HEAD
-=======
-
->>>>>>> d4b846b908b7575b998ff69d958fb9cabf151bb5
 public class EmpleadoController {
     @Autowired
     private IEmpleados interEmpleado;
- 
 
     @GetMapping("/getempleadoslist") //Metodo GET para obtener la lista de empleados
     public List<Empleados> getEmp() {
