@@ -29,18 +29,18 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
  @RestController
-
+@CrossOrigin(origins="https://desafiodevqa.web.app/")
 @RequestMapping("/empleados")
 public class EmpleadoController {
     @Autowired
     private IEmpleados interEmpleado;
 
-    @GetMapping("/getempleadoslist")
+    @GetMapping("/getempleadoslist") //Metodo GET para obtener la lista de empleados
     public List<Empleados> getEmp() {
         return interEmpleado.getEmpleado();
     }
 
-    @PostMapping("/crear")
+    @PostMapping("/crear")    //Metodo POST para crear un empleado nuevo
     public String createUser(@RequestBody Empleados emp) {
               interEmpleado.saveEmpleado(emp);
         return "El empleado ha sido guardado";
@@ -48,13 +48,13 @@ public class EmpleadoController {
     
 
 
-    @DeleteMapping("/borrar/{id}")
-    public String deleteEmp(@PathVariable Long id) {
+    @DeleteMapping("/borrar/{id}")  //Metodo para borrar un empleado
+    public ResponseEntity<String> deleteEmp(@PathVariable Long id) {
         interEmpleado.deleteEmpleado(id);
-        return "El empleado fue eliminado correctamente";
+        return ResponseEntity.status(HttpStatus.OK).body("El empleado fue eliminado correctamente");
     }
 
-    @PutMapping("/editar/{id}") // NO TIENE VALIDACION
+    @PutMapping("/editar/{id}") // NO TIENE VALIDACION. Metodo Update
     public Empleados editEmp(@PathVariable Long id,
                             @RequestParam("nombre") String nuevoNombre,
                             @RequestParam("apellido") String nuevoApellido,
