@@ -59,7 +59,7 @@ public class EmpleadoController {
                             @RequestParam("nombre") String nuevoNombre,
                             @RequestParam("apellido") String nuevoApellido,
                             @RequestParam("fechaIngreso") String nuevoIngreso,
-                            @RequestParam("FechaEgreso") String nuevoEgreso,
+                            @RequestParam("fechaEgreso") String nuevoEgreso,
                             @RequestParam("dni") int nuevoDni,
                             @RequestParam("compania") String nuevaCompania){
         Empleados emp = interEmpleado.findEmpleado(id);
