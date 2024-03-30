@@ -1,2 +1,2 @@
 # BackendDeveloperQAEjercicioPractico
-Backend de proyecto Dsafio Developer QA con JAVA SpringBoot y MySQL
+Backend de proyecto Desafio Developer QA con JAVA SpringBoot y MySQL
